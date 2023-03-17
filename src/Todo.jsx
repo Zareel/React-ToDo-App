@@ -75,7 +75,9 @@ const Todo = () => {
   };
 
   // remove all
-  const removeAll = () => {};
+  const removeAll = () => {
+    setToDo([]);
+  };
 
   return (
     <div>
@@ -127,7 +129,10 @@ const Todo = () => {
         {toDo.map((task, index) => {
           return (
             <React.Fragment>
-              <div className="bg-gray-700  w-[450px] mt-4 py-2 px-2 rounded-md flex justify-between ">
+              <div
+                key={task.id}
+                className="bg-gray-700  w-[450px] mt-4 py-2 px-2 rounded-md flex justify-between "
+              >
                 <span>
                   <span>{index + 1}</span> {task.title}
                 </span>
@@ -141,6 +146,7 @@ const Todo = () => {
                   </span>
                   {task.status ? null : (
                     <span
+                      key={task.id}
                       onClick={() =>
                         setUpdateData({
                           id: task.id,
@@ -167,6 +173,12 @@ const Todo = () => {
             </React.Fragment>
           );
         })}
+        <button
+          onClick={removeAll}
+          className="mt-10 bg-white text-black rounded-sm py-1 px-3"
+        >
+          Remove All
+        </button>
       </div>
     </div>
   );
